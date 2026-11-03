@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05060d">
+<title>NEXUS // Device Scanner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-glow g1" aria-hidden="true"></div>
+<div class="bg-glow g2" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="brand">
+    <span class="logo">N</span>
+    <div>
+      <h1>Nexus <em>Scanner</em></h1>
+      <p class="sub">Live device diagnostics &middot; real browser data</p>
+    </div>
+  </div>
+  <div class="status">
+    <span class="pill" id="netPill"><i></i><b>--</b></span>
+    <span class="clock mono" id="clock">--:--:--</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero glass">
+    <div class="ring" id="batRing" style="--p:0">
+      <div class="ring-in">
+        <strong id="batPct">--</strong>
+        <span id="batState">Battery</span>
+      </div>
+    </div>
+    <div class="hero-info">
+      <h2 id="deviceName">Detecting device…</h2>
+      <p class="mono muted" id="deviceSub">—</p>
+      <div class="chips" id="heroChips"></div>
+    </div>
+    <button class="btn primary" id="scanAll">⚡ Rescan &amp; Grant All</button>
+  </section>
+
+  <section class="grid" id="grid">
+
+    <article class="card glass" id="c-battery">
+      <header><h3>🔋 Battery</h3><span class="tag" data-tag="battery">checking</span></header>
+      <div class="bar"><span id="batBar"></span></div>
+      <dl class="rows"></dl>
+    </article>
+
+    <article class="card glass" id="c-storage">
+      <header><h3>💾 Storage</h3><span class="tag" data-tag="storage">checking</span></header>
+      <div class="bar"><span id="stoBar"></span></div>
+      <dl class="rows"></dl>
+      <p class="note">Browser sirf is site ka storage quota batata hai, poore phone ka nahi.</p>
+    </article>
+
+    <article class="card glass" id="c-display">
+      <header><h3>🖥 Display</h3><span class="tag ok">live</span></header>
+      <dl class="rows"></dl>
+    </article>
+
+    <article class="card glass" id="c-network">
+      <header><h3>📡 Network</h3><span class="tag" data-tag="network">checking</span></header>
+      <dl class="rows"></dl>
+      <button class="btn ghost" id="speedBtn">Run speed test</button>
+    </article>
+
+    <article class="card glass" id="c-hardware">
+      <header><h3>🧠 Hardware</h3><span class="tag ok">live</span></header>
+      <dl class="rows"></dl>
+    </article>
+
+    <article class="card glass" id="c-sound">
+      <header><h3>🔊 Sound &amp; Speaker</h3><span class="tag" data-tag="audio">locked</span></header>
+      <dl class="rows"></dl>
+      <div class="meter"><span id="micBar"></span></div>
+      <div class="btn-row">
+        <button class="btn ghost" id="micBtn">🎙 Mic test</button>
+        <button class="btn ghost" id="spkBtn">🔈 Speaker test</button>
+      </div>
+    </article>
+
+    <article class="card glass" id="c-camera">
+      <header><h3>📷 Camera</h3><span class="tag" data-tag="camera">locked</span></header>
+      <dl class="rows"></dl>
+      <video id="camView" playsinline muted hidden></video>
+      <button class="btn ghost" id="camBtn">Open camera</button>
+    </article>
+
+    <article class="card glass" id="c-location">
+      <header><h3>📍 Location</h3><span class="tag" data-tag="geolocation">locked</span></header>
+      <dl class="rows"></dl>
+      <button class="btn ghost" id="geoBtn">Get location</button>
+    </article>
+
+    <article class="card glass" id="c-motion">
+      <header><h3>🧭 Motion Sensors</h3><span class="tag" data-tag="motion">locked</span></header>
+      <div class="level"><span id="tiltDot"></span></div>
+      <dl class="rows"></dl>
+      <button class="btn ghost" id="motionBtn">Enable sensors</button>
+    </article>
+
+    <article class="card glass" id="c-gpu">
+      <header><h3>🎮 Graphics</h3><span class="tag ok">live</span></header>
+      <dl class="rows"></dl>
+    </article>
+
+    <article class="card glass" id="c-system">
+      <header><h3>⚙️ System</h3><span class="tag ok">live</span></header>
+      <dl class="rows"></dl>
+    </article>
+
+    <article class="card glass wide" id="c-perms">
+      <header><h3>🛡 Permission Center</h3><span class="tag ok">live</span></header>
+      <div class="perm-list" id="permList"></div>
+      <div class="btn-row">
+        <button class="btn ghost" id="notifBtn">🔔 Notifications</button>
+        <button class="btn ghost" id="vibBtn">📳 Vibrate</button>
+      </div>
+    </article>
+
+  </section>
+
+  <p class="foot">
+    Sab data tumhare browser se hi aata hai &mdash; kuch bhi kisi server par nahi bheja jata.
+    Browser security ki wajah se IMEI, exact RAM, ya phone ka total storage access nahi ho sakta.
+  </p>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="script.js"></script>
+</body>
+</html>
